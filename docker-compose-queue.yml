@@ -1,11 +1,11 @@
 collector:
   image: bowwow/fluentd-autobuild
-  #container_name: collector
+  container_name: collector
   environment:
     - "MONGO_HOST=mongo"
     - "constraint:node==swarm-node1"
   ports:
-    - "8080"
+    - "8080:8080"
   volumes:
     - /home/app:/fluentd/etc
   net: "cloud-overlay"
@@ -35,5 +35,5 @@ mongo:
   image: mongo
   container_name: mongo
   ports:
-    - "27017"
+    - "27017:27017"
   net: "cloud-overlay"

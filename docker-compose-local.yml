@@ -1,0 +1,17 @@
+collector:
+  image: bowwow/fluentd-autobuild
+  container_name: collector
+  environment:
+    - "MONGO_HOST=mongo"
+  ports:
+    - "8080:8080"
+  volumes:
+    - .:/fluentd/etc
+  links:
+    - mongo
+
+mongo:
+  image: mongo
+  container_name: mongo
+  ports:
+    - "27017:27017"

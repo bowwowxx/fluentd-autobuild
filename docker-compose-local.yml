@@ -10,6 +10,17 @@ collector:
   links:
     - mongo
 
+rabbitmq:
+  image: bowwowxx/rabbitmq-autobuild
+  container_name: rabbitmq
+  environment:
+    - "MONGO_HOST=mongo"
+    - "constraint:node==swarm-master"
+  ports:
+    - "5672:5672"
+    - "15672:15672"
+  links:
+    - collector
 mongo:
   image: mongo
   container_name: mongo

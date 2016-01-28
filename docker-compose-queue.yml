@@ -11,7 +11,7 @@ collector:
   net: "cloud-overlay"
 
 rabbitmq:
-  image: rabbitmq:latest
+  image: bowwow/rabbitmq-autobuild
   container_name: rabbitmq
   environment:
     - "MONGO_HOST=mongo"
@@ -19,7 +19,6 @@ rabbitmq:
   ports:
     - "5672:5672"
     - "15672:15672"
-
   net: "cloud-overlay"
 amqp:
     image: bowwow/amqp-mongo
@@ -30,7 +29,7 @@ amqp:
       - "MONGOCOLLECTION=info"
       - "TRANSLATECONTENT=true"
       - "constraint:node==swarm-node2"
-    entrypoint: "metaqueue"
+      - "metaqueue"
     net: "cloud-overlay"
 mongo:
   image: mongo

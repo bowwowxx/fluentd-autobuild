@@ -41,6 +41,7 @@ RUN gem install fluentd -v 0.12.19
 # RUN gem install fluent-plugin-webhdfs
 RUN gem install fluent-plugin-mongo
 RUN gem install bson_ext
+RUN gem install fluent-plugin-amqp2
 COPY fluent.conf /fluentd/etc/
 ONBUILD COPY fluent.conf /fluentd/etc/
 ONBUILD COPY plugins /fluentd/plugins/

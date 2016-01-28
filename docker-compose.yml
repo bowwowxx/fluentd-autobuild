@@ -8,7 +8,7 @@ collector:
     - "8080:8080"
   volumes:
     - .:/fluentd/etc
-    
+
   net: "cloud-overlay"
 
 mongo:

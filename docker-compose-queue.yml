@@ -1,0 +1,40 @@
+collector:
+  image: bowwow/fluentd-autobuild
+  #container_name: collector
+  environment:
+    - "MONGO_HOST=mongo"
+    - "constraint:node==swarm-node1"
+  ports:
+    - "8080"
+  volumes:
+    - /home/app:/fluentd/etc
+  net: "cloud-overlay"
+
+rabbitmq:
+  image: rabbitmq:latest
+  container_name: rabbitmq
+  environment:
+    - "MONGO_HOST=mongo"
+    - "constraint:node==swarm-master"
+  ports:
+    - "5672:5672"
+    - "15672:15672"
+
+  net: "cloud-overlay"
+amqp:
+    image: bowwow/amqp-mongo
+    container_name: amqp
+    environment:
+      - "AMQPHOST=mongo"
+      - "MONGODB=mongodb://mongo/metadata"
+      - "MONGOCOLLECTION=info"
+      - "TRANSLATECONTENT=true"
+      - "constraint:node==swarm-node2"
+    entrypoint: "metaqueue"
+    net: "cloud-overlay"
+mongo:
+  image: mongo
+  container_name: mongo
+  ports:
+    - "27017"
+  net: "cloud-overlay"

@@ -24,12 +24,12 @@ amqp:
     image: bowwow/amqp-mongo
     container_name: amqp
     environment:
-      - "AMQPHOST=mongo"
+      - "AMQPHOST=amqp://rabbitmq"
       - "MONGODB=mongodb://mongo/metadata"
       - "MONGOCOLLECTION=info"
       - "TRANSLATECONTENT=true"
+      - "QUEUENAME=metadata"
       - "constraint:node==swarm-node2"
-      - "metaqueue"
     net: "cloud-overlay"
 mongo:
   image: mongo

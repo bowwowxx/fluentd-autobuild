@@ -14,7 +14,7 @@ amqp:
     image: bowwow/amqp-mongo
     container_name: amqp
     environment:
-      - "AMQPHOST=amqp://rabbitmq"
+      - "AMQPHOST=amqp://xx:xx@rabbitmq"
       - "MONGODB=mongodb://mongo/metadata"
       - "MONGOCOLLECTION=info"
       - "TRANSLATECONTENT=true"

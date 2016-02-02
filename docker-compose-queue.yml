@@ -15,25 +15,41 @@ rabbitmq:
   container_name: rabbitmq
   environment:
     - "MONGO_HOST=mongo"
-    - "constraint:node==swarm-master"
+    - "constraint:node==swarm-node2"
   ports:
     - "5672:5672"
     - "15672:15672"
   net: "cloud-overlay"
+
 amqp:
     image: bowwow/amqp-mongo
     container_name: amqp
     environment:
-      - "AMQPHOST=amqp://rabbitmq"
+      - "AMQPHOST=amqp://guest:guest@rabbitmq"
       - "MONGODB=mongodb://mongo/metadata"
       - "MONGOCOLLECTION=info"
       - "TRANSLATECONTENT=true"
-      - "QUEUENAME=metadata"
-      - "constraint:node==swarm-node2"
+      - "QUEUENAME=meta1"
+      - "constraint:node==swarm-node3"
     net: "cloud-overlay"
+
+amqp1:
+    image: bowwow/amqp-mongo
+    container_name: amqp1
+    environment:
+      - "AMQPHOST=amqp://guest:guest@rabbitmq"
+      - "MONGODB=mongodb://mongo/metadata"
+      - "MONGOCOLLECTION=info1"
+      - "TRANSLATECONTENT=true"
+      - "QUEUENAME=meta2"
+      - "constraint:node==swarm-node3"
+    net: "cloud-overlay"
+
 mongo:
   image: mongo
   container_name: mongo
   ports:
     - "27017:27017"
+  environment:
+    - "constraint:node==swarm-node3"
   net: "cloud-overlay"

@@ -43,7 +43,7 @@ RUN gem install fluent-plugin-mongo
 RUN gem install bson_ext
 RUN git clone https://github.com/bowwowxx/fluent-plugin-amqp.git /tmp/amqp
 RUN gem build /tmp/amqp/fluent-plugin-amqp2.gemspec
-RUN gem install /tmp/amqp/fluent-plugin-amqp2-0.1.0.gem
+RUN gem install fluent-plugin-amqp2-0.1.0.gem
 #RUN gem install fluent-plugin-amqp2
 COPY fluent.conf /fluentd/etc/
 ONBUILD COPY fluent.conf /fluentd/etc/
